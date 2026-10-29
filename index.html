@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happiest Birthday</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6ecdc;--card:#fffaf0;--br:#4a2c1a;--mid:#7b4f32;--gold:#b8894f;--soft:#ecdcc3;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--br);font-family:Lora,Georgia,serif;min-height:100vh}
+h1,h2{font-family:"Playfair Display",Georgia,serif;font-weight:500;margin:.2em 0}
+h1{font-size:46px;line-height:1.1;font-style:italic}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px;background:var(--bg);border-bottom:1px solid var(--soft)}
+nav button{flex:none;border:1px solid var(--gold);border-radius:20px;padding:7px 14px;background:transparent;color:var(--mid);font:inherit;font-size:14px;cursor:pointer}
+nav button.on{background:var(--br);color:var(--bg);border-color:var(--br)}
+nav button:disabled{opacity:.35;cursor:default}
+section{display:none;padding:18px;max-width:560px;margin:auto;text-align:center;animation:in .5s}
+section.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+.card{background:var(--card);border:1px solid var(--soft);border-radius:16px;padding:22px 18px;margin:14px 0;box-shadow:0 6px 20px #4a2c1a18}
+p{line-height:1.7;font-size:17px}
+.btn{border:0;border-radius:24px;padding:12px 28px;font:inherit;font-size:16px;color:var(--bg);background:var(--br);cursor:pointer;margin:6px}
+.btn.alt{background:transparent;color:var(--br);border:1px solid var(--br)}
+.line{width:60px;height:2px;background:var(--gold);margin:12px auto}
+.frame{position:relative;aspect-ratio:3/4;max-width:340px;margin:14px auto;border:2px dashed var(--gold);border-radius:14px;background:var(--soft);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;color:var(--mid);font-size:16px}
+.frame.has{border:6px solid var(--card);box-shadow:0 6px 20px #4a2c1a30}
+.frame.wide{aspect-ratio:4/3;max-width:440px}
+.frame img{width:100%;height:100%;object-fit:cover}
+.edit{position:absolute;right:8px;bottom:8px;font:inherit;font-size:13px;border:0;border-radius:12px;background:#4a2c1acc;color:var(--bg);padding:5px 10px}
+.mem{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.mc{aspect-ratio:1;perspective:600px;cursor:pointer}
+.mc div{position:relative;width:100%;height:100%;transition:transform .5s;-webkit-transform-style:preserve-3d;transform-style:preserve-3d}
+.mc.f div{transform:rotateY(180deg)}
+.mc span{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.mc .b{background:var(--br);color:var(--gold);font-size:26px;font-family:Georgia,serif}
+.mc .fr{background:var(--card);border:2px solid var(--gold);transform:rotateY(180deg)}
+.mc .fr svg{width:68%;height:68%}
+.mc.d .fr{background:var(--soft)}
+#cdl{display:flex;justify-content:center;gap:16px;height:120px;align-items:flex-end}
+.cd{width:12px;height:70px;background:repeating-linear-gradient(#b8894f 0 8px,#fffaf0 8px 16px);border-radius:3px;position:relative}
+.fl{position:absolute;top:-24px;left:-3px;width:18px;height:26px;background:radial-gradient(#fff,#f5b942 55%,#e07a1f);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:fk .3s infinite alternate;transition:opacity .5s}
+.out .fl{opacity:0;animation:none}
+@keyframes fk{to{transform:scale(1.12) rotate(4deg)}}
+#cake{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:240px}
+.ly{height:48px;border-radius:10px;margin-top:-4px;animation:drop .6s cubic-bezier(.3,1.4,.5,1);box-shadow:inset 0 -8px #0002}
+@keyframes drop{from{transform:translateY(-220px);opacity:0}}
+.cds{display:flex;gap:16px;animation:drop .6s}
+#gw{position:relative;width:150px;height:150px;margin:34px auto 10px;cursor:pointer}
+#gb{position:absolute;bottom:0;width:150px;height:105px;background:var(--mid);border-radius:6px}
+#gb:after{content:"";position:absolute;left:62px;top:0;width:26px;height:100%;background:var(--gold)}
+#gl{position:absolute;top:0;left:-8px;width:166px;height:46px;background:var(--br);border-radius:6px;transition:transform .8s;transform-origin:left bottom}
+#gl:after{content:"";position:absolute;left:70px;top:0;width:26px;height:100%;background:var(--gold)}
+#gw.open #gl{transform:translate(40px,-70px) rotate(24deg);opacity:.0;transition:transform .8s,opacity .8s .3s}
+#gw{animation:wob 1.6s infinite}
+#gw.open{animation:none}
+@keyframes wob{50%{transform:rotate(3deg)}}
+.gc{display:none;background:var(--card);border:1px solid var(--gold);border-radius:14px;padding:16px;margin:12px 0;animation:in .7s;font-style:italic}
+.gc b{display:block;font-family:"Playfair Display",Georgia,serif;font-style:normal;color:var(--mid);margin-bottom:4px}
+.cf{position:fixed;top:-20px;width:9px;height:14px;pointer-events:none;z-index:9;animation:fall 3.2s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+</style></head><body>
+<nav id="nav"></nav>
+
+<section id="p0" class="on"><div class="card" style="margin-top:40px">
+<div class="line"></div><p style="letter-spacing:3px;font-size:13px">A LITTLE SURPRISE FOR YOU</p>
+<h1>Happiest Birthday</h1><div class="line"></div>
+<p>Today is all about you. I made this little place with a lot of care, so take your time and go through it one page at a time.</p>
+<button class="btn" onclick="nx()">Begin</button></div></section>
+
+<section id="p1"><h2>Where it began</h2><div class="line"></div>
+<div class="frame" data-slot="baby"></div>
+<p>Every great story has a sweet beginning. Look at that little face, so innocent and full of curiosity. Even then, you were someone special in the making.</p>
+<button class="btn" onclick="nx()">Next</button></section>
+
+<section id="p2"><h2>Growing up</h2><div class="line"></div>
+<div class="frame" data-slot="kid"></div>
+<p>Time moved on, and you grew into a bright, cheerful person. Every year added a new smile, a new lesson and a new reason people are glad to know you.</p>
+<button class="btn" onclick="nx()">Next</button></section>
+
+<section id="p3"><h2>The you of today</h2><div class="line"></div>
+<div class="frame" data-slot="now"></div>
+<p>And here you are. Kind, genuine and easy to be around. You make ordinary days feel lighter, and that is a rare thing.</p>
+<button class="btn" onclick="nx()">Next</button></section>
+
+<section id="p4"><h2>You and me</h2><div class="line"></div>
+<div class="frame wide" data-slot="both"></div>
+<p>Some of my favourite memories have you in them. Thank you for the laughter, the support and for simply being a true friend. I am lucky to have you.</p>
+<button class="btn" onclick="nx()">Next</button></section>
+
+<section id="p5"><h2>A little game</h2><div class="line"></div>
+<p>Match the pairs. Take your time, there is no rush today.</p>
+<div class="mem" id="mem"></div>
+<p>Moves: <b id="mv">0</b> <span id="gm"></span></p>
+<button class="btn alt" onclick="mk()">Shuffle again</button>
+<button class="btn" onclick="nx()">Next</button></section>
+
+<section id="p6"><h2>Make a wish</h2><div class="line"></div>
+<div class="card"><div id="cdl"></div>
+<p id="wm">Close your eyes, think of something wonderful, then blow out the candles.</p>
+<button class="btn" onclick="blow()">Blow</button>
+<button class="btn alt" onclick="lite()">Relight</button></div>
+<button class="btn" onclick="nx()">Next</button></section>
+
+<section id="p7"><h2>Your cake</h2><div class="line"></div>
+<div class="card"><div id="cake"></div>
+<p id="cm">Add the layers one by one.</p>
+<button class="btn" id="ab" onclick="addL()">Add a layer</button></div>
+<button class="btn" onclick="nx()">Next</button></section>
+
+<section id="p8"><h2>One last thing</h2><div class="line"></div>
+<div id="gw" onclick="openG()"><div id="gb"></div><div id="gl"></div></div>
+<p id="gt">Tap the gift to open it.</p>
+<div class="gc"><b>Gift card one</b>A lifetime of good health and a heart that stays happy.</div>
+<div class="gc"><b>Gift card two</b>Every goal you dream of, achieved one step at a time.</div>
+<div class="gc"><b>Gift card three</b>A friend who will always be there, whenever you need one.</div>
+<h2 id="end" style="display:none;margin-top:24px">Happiest Birthday</h2></section>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const names=["Start","Beginning","Growing up","Today","Together","Game","Wish","Cake","Gift"];
+let cur=0,max=0;
+names.forEach((n,i)=>{const b=document.createElement("button");b.textContent=n;b.onclick=()=>go(i);$("#nav").append(b)});
+function go(i){if(i>max)return;cur=i;$$("section").forEach((s,k)=>s.classList.toggle("on",k==i));$$("nav button").forEach((b,k)=>{b.classList.toggle("on",k==i);b.disabled=k>max});scrollTo(0,0);const b=$$("nav button")[i];b.scrollIntoView({inline:"center",block:"nearest"})}
+function nx(){if(cur>=8)return;max=Math.max(max,cur+1);go(cur+1)}
+go(0);
+function boom(){const c=["#4a2c1a","#7b4f32","#b8894f","#e8d3a9","#fffaf0"];for(let i=0;i<45;i++){const e=document.createElement("div");e.className="cf";e.style.background=c[i%5];e.style.left=Math.random()*100+"vw";e.style.animationDelay=Math.random()*1.2+"s";document.body.append(e);setTimeout(()=>e.remove(),4800)}}
+// storage
+const G=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+const P=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+// photos
+$$(".frame").forEach(f=>{const id=f.dataset.slot,inp=document.createElement("input");inp.type="file";inp.accept="image/*";inp.hidden=true;f.after(inp);
+ const show=s=>{f.innerHTML='<img src="'+s+'">';f.classList.add("has")};
+ const old=G("img_"+id);if(old)show(old);else f.textContent="Tap to add a photo";
+ f.onclick=e=>{if(f.classList.contains("has")&&!e.target.classList.contains("edit"))return;inp.click()};
+ inp.onchange=()=>{const fl=inp.files[0];if(!fl)return;const r=new FileReader();
+  r.onload=()=>{const im=new Image();im.onload=()=>{const s=Math.min(1,800/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);const d=c.toDataURL("image/jpeg",.82);P("img_"+id,d);show(d)};im.src=r.result};r.readAsDataURL(fl);inp.value=""}});
+// memory game
+let first=null,lock=0,mvs=0,done=0;
+function mk(){const I={cake:`<svg viewBox="0 0 48 48"><rect x="8" y="28" width="32" height="12" rx="3" fill="#7b4f32"/><rect x="13" y="19" width="22" height="10" rx="3" fill="#e8c99b"/><rect x="23" y="11" width="3" height="8" fill="#b8894f"/><ellipse cx="24.5" cy="8" rx="3" ry="4" fill="#f5b942"/></svg>`,candle:`<svg viewBox="0 0 48 48"><rect x="20" y="17" width="8" height="23" fill="#b8894f"/><rect x="13" y="40" width="22" height="4" rx="2" fill="#4a2c1a"/><ellipse cx="24" cy="10" rx="4" ry="6" fill="#f5b942"/></svg>`,gift:`<svg viewBox="0 0 48 48"><rect x="9" y="21" width="30" height="20" fill="#7b4f32"/><rect x="7" y="15" width="34" height="8" rx="2" fill="#4a2c1a"/><rect x="22" y="15" width="4" height="26" fill="#b8894f"/><ellipse cx="18" cy="11" rx="6" ry="4" fill="none" stroke="#b8894f" stroke-width="3"/><ellipse cx="30" cy="11" rx="6" ry="4" fill="none" stroke="#b8894f" stroke-width="3"/></svg>`,star:`<svg viewBox="0 0 48 48"><polygon points="24,6 29.5,18 42,19.5 32.5,28 35.5,41 24,34 12.5,41 15.5,28 6,19.5 18.5,18" fill="#b8894f"/></svg>`,heart:`<svg viewBox="0 0 48 48"><path d="M24 40C8 28 8 14 18 12c3-.5 5 1 6 3 1-2 3-3.500 6-3 10 2 10 16-6 28z" fill="#7b4f32"/></svg>`,balloon:`<svg viewBox="0 0 48 48"><ellipse cx="24" cy="20" rx="12" ry="15" fill="#b8894f"/><polygon points="21,35 27,35 24,39" fill="#b8894f"/><path d="M24 39q-4 4 0 8" stroke="#4a2c1a" stroke-width="2" fill="none"/></svg>`};const w=Object.keys(I),a=[...w,...w].sort(()=>Math.random()-.5);first=null;lock=0;mvs=0;done=0;$("#mv").textContent=0;$("#gm").textContent="";$("#mem").innerHTML="";
+ a.forEach(x=>{const c=document.createElement("div");c.className="mc";c.dataset.w=x;c.innerHTML='<div><span class="b">?</span><span class="fr">'+I[x]+'</span></div>';
+  c.onclick=()=>{if(lock||c.classList.contains("f"))return;c.classList.add("f");if(!first){first=c;return}
+   $("#mv").textContent=++mvs;
+   if(first.dataset.w==c.dataset.w){first.classList.add("d");c.classList.add("d");first=null;if(++done==6){$("#gm").textContent="Well done!";boom()}}
+   else{lock=1;const f=first;first=null;setTimeout(()=>{f.classList.remove("f");c.classList.remove("f");lock=0},800)}};
+  $("#mem").append(c)})}
+mk();
+// candles
+function lite(){$("#cdl").innerHTML="";for(let i=0;i<5;i++)$("#cdl").innerHTML+='<div class="cd"><div class="fl"></div></div>';$("#cdl").classList.remove("out");$("#wm").textContent="Close your eyes, think of something wonderful, then blow out the candles."}
+function blow(){$("#cdl").classList.add("out");$("#wm").textContent="May your wish come true. Happiest Birthday!";boom()}
+lite();
+// cake
+const cols=["#8a5a3b","#e8c99b","#fffaf0"];let L=0;
+function addL(){const k=$("#cake");if(L>=3)return;const d=document.createElement("div");d.className="ly";d.style.background=cols[L];d.style.width=(250-L*70)+"px";k.insertBefore(d,k.firstChild);L++;
+ if(L==3){const c=document.createElement("div");c.className="cds";c.innerHTML='<div class="cd" style="height:40px"><div class="fl"></div></div><div class="cd" style="height:40px"><div class="fl"></div></div><div class="cd" style="height:40px"><div class="fl"></div></div>';k.insertBefore(c,k.firstChild);$("#ab").style.display="none";$("#cm").textContent="Your cake is ready. Enjoy every bite!";setTimeout(boom,600)}}
+// gift
+function openG(){const g=$("#gw");if(g.classList.contains("open"))return;g.classList.add("open");$("#gt").textContent="Just for you.";boom();
+ $$(".gc").forEach((c,i)=>setTimeout(()=>c.style.display="block",500+i*600));setTimeout(()=>{$("#end").style.display="block";boom()},2600)}
+</script></body></html>
